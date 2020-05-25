@@ -12,14 +12,18 @@ rule filter:
         metadata = "data/metadata.tsv"
     output:
         sequences = "results/filtered.fasta"
+    params:
+        min_length = 25000,
+        group_by = "region year month",
+        sequences_per_group = 10
     shell:
         """
         augur filter \
               --sequences {input.sequences} \
               --metadata {input.metadata} \
-              --min-length 25000 \
-              --group-by region year month \
-              --sequences-per-group 10 \
+              --min-length {params.min_length} \
+              --group-by {params.group_by} \
+              --sequences-per-group {params.sequences_per_group} \
               --output {output.sequences}
         """
 
@@ -30,11 +34,12 @@ rule align:
         reference = "config/reference.gb"
     output:
         alignment = "results/aligned.fasta"
+    threads: 4
     shell:
         """
         augur align \
               --sequences {input.sequences} \
-              --nthreads 4 \
+              --nthreads {threads} \
               --reference-sequence {input.reference} \
               --remove-reference \
               --fill-gaps \
@@ -47,11 +52,12 @@ rule tree:
         alignment = "results/aligned.fasta"
     output:
         tree = "results/tree_raw.nwk"
+    threads: 4
     shell:
         """
         augur tree \
               --alignment {input.alignment} \
-              --nthreads 4 \
+              --nthreads {threads} \
               --output {output.tree}
         """
 
