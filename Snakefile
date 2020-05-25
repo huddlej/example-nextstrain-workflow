@@ -13,6 +13,8 @@ rule filter:
         metadata = "data/metadata.tsv"
     output:
         sequences = "results/filtered.fasta"
+    log:
+        "logs/filter.txt"
     params:
         min_length = config["min_length"],
         group_by = config["group_by"],
@@ -25,7 +27,7 @@ rule filter:
               --min-length {params.min_length} \
               --group-by {params.group_by} \
               --sequences-per-group {params.sequences_per_group} \
-              --output {output.sequences}
+              --output {output.sequences} &> {log}
         """
 
 rule align:
@@ -35,6 +37,8 @@ rule align:
         reference = "config/reference.gb"
     output:
         alignment = "results/aligned.fasta"
+    log:
+        "logs/align.txt"
     threads: 4
     shell:
         """
@@ -44,7 +48,7 @@ rule align:
               --reference-sequence {input.reference} \
               --remove-reference \
               --fill-gaps \
-              --output {output.alignment}
+              --output {output.alignment} &> {log}
         """
 
 rule tree:
@@ -53,13 +57,15 @@ rule tree:
         alignment = "results/aligned.fasta"
     output:
         tree = "results/tree_raw.nwk"
+    log:
+        "logs/tree.txt"
     threads: 4
     shell:
         """
         augur tree \
               --alignment {input.alignment} \
               --nthreads {threads} \
-              --output {output.tree}
+              --output {output.tree} &> {log}
         """
 
 rule refine:
@@ -71,6 +77,8 @@ rule refine:
     output:
         tree = "results/tree.nwk",
         node_data = "results/branch_lengths.json"
+    log:
+        "logs/refine.txt"
     shell:
         """
         augur refine \
@@ -79,7 +87,7 @@ rule refine:
               --metadata {input.metadata} \
               --timetree \
               --output-node-data {output.node_data} \
-              --output-tree {output.tree}
+              --output-tree {output.tree} &> {log}
         """
 
 rule export:
@@ -90,11 +98,13 @@ rule export:
         node_data = "results/branch_lengths.json"
     output:
         tree = "auspice/global.json"
+    log:
+        "logs/export.txt"
     shell:
         """
         augur export v2 \
               --tree {input.tree} \
               --metadata {input.metadata} \
               --node-data {input.node_data} \
-              --output {output.tree}
+              --output {output.tree} &> {log}
         """
