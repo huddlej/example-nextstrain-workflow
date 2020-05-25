@@ -15,6 +15,8 @@ rule filter:
         sequences = "results/filtered.fasta"
     log:
         "logs/filter.txt"
+    conda:
+        "envs/nextstrain.yaml"
     params:
         min_length = config["min_length"],
         group_by = config["group_by"],
@@ -39,6 +41,8 @@ rule align:
         alignment = "results/aligned.fasta"
     log:
         "logs/align.txt"
+    conda:
+        "envs/nextstrain.yaml"
     threads: 4
     shell:
         """
@@ -59,6 +63,8 @@ rule tree:
         tree = "results/tree_raw.nwk"
     log:
         "logs/tree.txt"
+    conda:
+        "envs/nextstrain.yaml"
     threads: 4
     shell:
         """
@@ -79,6 +85,8 @@ rule refine:
         node_data = "results/branch_lengths.json"
     log:
         "logs/refine.txt"
+    conda:
+        "envs/nextstrain.yaml"
     shell:
         """
         augur refine \
@@ -100,6 +108,8 @@ rule export:
         tree = "auspice/global.json"
     log:
         "logs/export.txt"
+    conda:
+        "envs/nextstrain.yaml"
     shell:
         """
         augur export v2 \

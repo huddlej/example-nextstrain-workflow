@@ -1,0 +1,8 @@
+channels:
+  - default
+  - bioconda
+dependencies:
+  - mafft
+  - iqtree
+  - pip:
+      - git+https://github.com/nextstrain/augur.git@master
