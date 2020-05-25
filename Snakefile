@@ -1,6 +1,7 @@
 """
 Run Nextstrain builds for SARS-CoV-2 starting with curated sequences.fasta and metadata.tsv files.
 """
+configfile: "config/config.yaml"
 
 rule all:
     input: "auspice/global.json"
@@ -13,9 +14,9 @@ rule filter:
     output:
         sequences = "results/filtered.fasta"
     params:
-        min_length = 25000,
-        group_by = "region year month",
-        sequences_per_group = 10
+        min_length = config["min_length"],
+        group_by = config["group_by"],
+        sequences_per_group = config["sequences_per_group"]
     shell:
         """
         augur filter \
