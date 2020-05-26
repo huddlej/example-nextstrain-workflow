@@ -1,0 +1,4 @@
+cores: 4
+printshellcmds: True
+set-threads: align=2
+use-conda: True
