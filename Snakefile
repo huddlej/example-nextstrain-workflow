@@ -5,9 +5,7 @@ configfile: "config/config.yaml"
 
 rule all:
     input:
-        #"auspice/global.json",
-        "auspice/oceania.json",
-        "auspice/asia.json"
+        expand("auspice/{region}.json", region=config["regions"])
 
 include: "rules/common.smk"
 
@@ -26,14 +24,14 @@ rule filter:
         min_length = config["min_length"],
         group_by = config["group_by"],
         sequences_per_group = config["sequences_per_group"],
-        region_name = _get_region_name_by_wildcards
+        query_argument = _get_query_argument_by_wildcards
     shell:
         """
         augur filter \
               --sequences {input.sequences} \
               --metadata {input.metadata} \
               --min-length {params.min_length} \
-              --query "region == '{params.region_name}'" \
+              {params.query_argument} \
               --group-by {params.group_by} \
               --sequences-per-group {params.sequences_per_group} \
               --output {output.sequences} &> {log}

@@ -1,3 +1,9 @@
+# Define regions to build.
+regions:
+  - global
+  - asia
+  - oceania
+
 # Filter sequences to meet these requirements prior to alignment.
 min_length: 25000
 group_by: region year month
