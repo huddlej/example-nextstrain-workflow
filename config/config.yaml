@@ -2,3 +2,9 @@
 min_length: 25000
 group_by: region year month
 sequences_per_group: 10
+
+# Map short region names to their human-readable names.
+region_name_by_region:
+  asia: Asia
+  north-america: North America
+  oceania: Oceania

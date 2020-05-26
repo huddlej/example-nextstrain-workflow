@@ -4,7 +4,12 @@ Run Nextstrain builds for SARS-CoV-2 starting with curated sequences.fasta and m
 configfile: "config/config.yaml"
 
 rule all:
-    input: "auspice/global.json"
+    input:
+        #"auspice/global.json",
+        "auspice/oceania.json",
+        "auspice/asia.json"
+
+include: "rules/common.smk"
 
 rule filter:
     message: "Filter sequences and metadata to keep high quality sequences."
@@ -12,21 +17,23 @@ rule filter:
         sequences = "data/sequences.fasta",
         metadata = "data/metadata.tsv"
     output:
-        sequences = "results/filtered.fasta"
+        sequences = "results/{region}/filtered.fasta"
     log:
-        "logs/filter.txt"
+        "logs/filter_{region}.txt"
     conda:
         "envs/nextstrain.yaml"
     params:
         min_length = config["min_length"],
         group_by = config["group_by"],
-        sequences_per_group = config["sequences_per_group"]
+        sequences_per_group = config["sequences_per_group"],
+        region_name = _get_region_name_by_wildcards
     shell:
         """
         augur filter \
               --sequences {input.sequences} \
               --metadata {input.metadata} \
               --min-length {params.min_length} \
+              --query "region == '{params.region_name}'" \
               --group-by {params.group_by} \
               --sequences-per-group {params.sequences_per_group} \
               --output {output.sequences} &> {log}
@@ -35,12 +42,12 @@ rule filter:
 rule align:
     message: "Align sequences."
     input:
-        sequences = "results/filtered.fasta",
+        sequences = "results/{region}/filtered.fasta",
         reference = "config/reference.gb"
     output:
-        alignment = "results/aligned.fasta"
+        alignment = "results/{region}/aligned.fasta"
     log:
-        "logs/align.txt"
+        "logs/align_{region}.txt"
     conda:
         "envs/nextstrain.yaml"
     threads: 4
@@ -58,11 +65,11 @@ rule align:
 rule tree:
     message: "Infer a tree."
     input:
-        alignment = "results/aligned.fasta"
+        alignment = "results/{region}/aligned.fasta"
     output:
-        tree = "results/tree_raw.nwk"
+        tree = "results/{region}/tree_raw.nwk"
     log:
-        "logs/tree.txt"
+        "logs/tree_{region}.txt"
     conda:
         "envs/nextstrain.yaml"
     threads: 4
@@ -77,14 +84,14 @@ rule tree:
 rule refine:
     message: "Build a time tree."
     input:
-        alignment = "results/aligned.fasta",
-        tree = "results/tree_raw.nwk",
+        alignment = "results/{region}/aligned.fasta",
+        tree = "results/{region}/tree_raw.nwk",
         metadata = "data/metadata.tsv"
     output:
-        tree = "results/tree.nwk",
-        node_data = "results/branch_lengths.json"
+        tree = "results/{region}/tree.nwk",
+        node_data = "results/{region}/branch_lengths.json"
     log:
-        "logs/refine.txt"
+        "logs/refine_{region}.txt"
     conda:
         "envs/nextstrain.yaml"
     shell:
@@ -101,13 +108,13 @@ rule refine:
 rule export:
     message: "Export tree to view with auspice."
     input:
-        tree = "results/tree.nwk",
+        tree = "results/{region}/tree.nwk",
         metadata = "data/metadata.tsv",
-        node_data = "results/branch_lengths.json"
+        node_data = "results/{region}/branch_lengths.json"
     output:
-        tree = "auspice/global.json"
+        tree = "auspice/{region}.json"
     log:
-        "logs/export.txt"
+        "logs/export_{region}.txt"
     conda:
         "envs/nextstrain.yaml"
     shell:
