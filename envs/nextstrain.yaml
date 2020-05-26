@@ -2,7 +2,10 @@ channels:
   - default
   - bioconda
 dependencies:
+  - pip
   - mafft
   - iqtree
+  - networkx
+  - pygraphviz
   - pip:
       - git+https://github.com/nextstrain/augur.git@master
