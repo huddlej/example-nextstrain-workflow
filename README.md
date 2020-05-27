@@ -5,6 +5,13 @@ A demonstration of how to migrate commands for a Nextstrain build from a simple 
 ## Quickstart
 
 [Install miniconda](https://docs.conda.io/en/latest/miniconda.html).
+Clone the repository.
+
+```bash
+git clone https://github.com/huddlej/example-nextstrain-workflow.git
+cd example-nextstrain-workflow
+```
+
 Create an environment to test this Nextstrain workflow.
 
 ```bash
