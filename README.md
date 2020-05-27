@@ -502,4 +502,10 @@ This walkthrough showed one example of how to convert a simple Nextstrain workfl
 The current Nextstrain workflow for SARS-CoV-2 is much more complicated than the example shown here, but many of the principles described here are applied in the full workflow.
 For more details, check out [the guide on how to run the SARS-CoV-2 build for Nextstrain](https://github.com/nextstrain/ncov/blob/master/docs/running.md).
 
+## Acknowledgements
+
+All SARS-CoV-2 sequences used here were originally submitted to GenBank by their authors.
+Authorship details and original GenBank accessions are available in `data/metadata.tsv`.
+[@joverlee521](https://github.com/joverlee521) provided scripts to curate original GenBank records for use by augur.
+
 [auspice.us]: https://auspice-us.herokuapp.com/
