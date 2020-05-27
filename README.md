@@ -4,7 +4,7 @@ A demonstration of how to migrate commands for a Nextstrain build from a simple 
 
 ## Quickstart
 
-Install miniconda.
+[Install miniconda](https://docs.conda.io/en/latest/miniconda.html).
 Create an environment to test this Nextstrain workflow.
 
 ```bash
