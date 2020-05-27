@@ -7,5 +7,8 @@ dependencies:
   - iqtree
   - networkx
   - pygraphviz
+  - jinja2
+  - pygments
   - pip:
-      - git+https://github.com/nextstrain/augur.git@master
+      - git+https://github.com/nextstrain/augur.git@update-snakemake-dependency
+      - snakemake

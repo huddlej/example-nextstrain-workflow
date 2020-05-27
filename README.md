@@ -144,4 +144,21 @@ snakemake --forceall --dag
 
 ![Basic workflow DAG](simple_dag.png)
 
+From this graph, we see that Snakemake will start with the `filter` rule and run through to the auspice `export` rule.
+The `all` rule always aggregates all the final outputs, so this will usually be your final output of the graph.
+This graph also reveals that the output of the `align` rule is used twice.
+This is a fact that you could easily miss while scanning the source code or the print statements from the dryrun.
+
+Finally, you can generate a report of how your workflow will run or did run.
+Before you run the workflow, the report will provide a cleaner D3 view of the DAG.
+
+```bash
+snakemake --report report.html
+```
+
+After you run the workflow, the report will include statistics about how long each rule took to run, what the configuration for the run was, and any other report details you include in the Snakefile.
+We won't cover how to build reports here, but they are worth looking into.
+
+
+
 [auspice.us]: https://auspice-us.herokuapp.com/
