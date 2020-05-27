@@ -483,6 +483,19 @@ Now, we can replace the longer Snakemake command from above with the following c
 snakemake --profile profiles/default
 ```
 
+To see how the workflow has changed, inspect the difference between the workflow with conditional logic and with profiles.
+
+```bash
+git diff workflow-with-conditional-logic workflow-with-profile
+```
+
+To see how the workflow looks with a profile, check out the corresponding tag.
+Note that this version of the repository defines a custom profile for my username in `profiles/huddlej/`.
+
+```bash
+git checkout workflow-with-profile
+```
+
 ## Conclusions
 
 This walkthrough showed one example of how to convert a simple Nextstrain workflow from a bash shell script to a multi-region workflow that can be easily configured by users and run in parallel with locally or in a distributed environment.
