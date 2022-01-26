@@ -39,7 +39,7 @@ snakemake --cores 4
 
 ## Background on Snakemake
 
-Snakemake a domain-specific language (DSL) is written in Python.
+Snakemake's domain-specific language (DSL) is written in Python.
 A Snakemake workflow consists of one or more rules that run commands.
 Snakemake translates rules in the DSL into Python behind the scenes.
 You can write standard Python code almost anywhere in a Snakefile.
