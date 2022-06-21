@@ -5,6 +5,12 @@ A demonstration of how to migrate commands for a Nextstrain build from a simple 
 ## Quickstart
 
 [Install miniconda](https://docs.conda.io/en/latest/miniconda.html).
+Then, install Mamba.
+
+```bash
+conda install -n base -c conda-forge mamba --yes
+```
+
 Clone the repository.
 
 ```bash
@@ -15,7 +21,9 @@ cd example-nextstrain-workflow
 Create an environment to test this Nextstrain workflow.
 
 ```bash
-conda env create -n nextstrain-workflow -f envs/nextstrain.yaml
+mamba create -n nextstrain-workflow \
+  -c conda-forge -c bioconda \
+  snakemake augur
 ```
 
 Activate the environment to use the workflow.
