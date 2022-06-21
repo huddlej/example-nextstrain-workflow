@@ -1,14 +1,7 @@
 channels:
-  - default
+  - conda-forge
   - bioconda
+  - default
 dependencies:
-  - pip
-  - mafft
-  - iqtree
-  - networkx
-  - pygraphviz
-  - jinja2
-  - pygments
-  - pip:
-      - git+https://github.com/nextstrain/augur.git@update-snakemake-dependency
-      - snakemake
+  - augur
+  - snakemake
