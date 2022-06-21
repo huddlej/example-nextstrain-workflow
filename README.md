@@ -21,9 +21,7 @@ cd example-nextstrain-workflow
 Create an environment to test this Nextstrain workflow.
 
 ```bash
-mamba create -n nextstrain-workflow \
-  -c conda-forge -c bioconda \
-  snakemake augur
+mamba env create -n nextstrain-workflow -f envs/nextstrain.yaml
 ```
 
 Activate the environment to use the workflow.
