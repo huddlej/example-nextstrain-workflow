@@ -384,11 +384,15 @@ This variable will allow us to ask for a build by any name and Snakemake will re
 Snakemake calls these variables "wildcards".
 Replace "oceania" with a `{region}` wildcard and confirm that we can request builds for different regions.
 
-```bash
-# Try a build for Asia
-snakemake -np auspice/asia.json
+Try a build for Asia.
 
-# Or try a build for Oceania
+```bash
+snakemake -np auspice/asia.json
+```
+
+Or try a build for Oceania.
+
+``` bash
 snakemake -np auspice/oceania.json
 ```
 
