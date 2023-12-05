@@ -249,7 +249,7 @@ git diff workflow-with-params workflow-with-config
 To see how the workflow looks with a configuration file, check out the corresponding tag.
 
 ```bash
-git checkout workflow-with-config
+git checkout --force workflow-with-config
 ```
 
 Inspect `Snakefile` with your text editor to see how parameters work in context of the full workflow.
@@ -303,7 +303,7 @@ git diff workflow-with-config workflow-with-logging
 To see how the workflow looks with logging, check out the corresponding tag.
 
 ```bash
-git checkout workflow-with-logging
+git checkout --force workflow-with-logging
 ```
 
 ### Run rules in a custom conda environment
@@ -339,7 +339,7 @@ git diff workflow-with-logging workflow-with-conda
 To see how the workflow looks with conda environments, check out the corresponding tag.
 
 ```bash
-git checkout workflow-with-conda
+git checkout --force workflow-with-conda
 ```
 
 Run the workflow with conda environments per rule.
@@ -410,7 +410,7 @@ git diff workflow-with-conda workflow-with-wildcards
 To see how the workflow looks with conda environments, check out the corresponding tag.
 
 ```bash
-git checkout workflow-with-wildcards
+git checkout --force workflow-with-wildcards
 ```
 
 Confirm that the workflow will run multiple region builds with one command.
@@ -441,7 +441,7 @@ git diff workflow-with-wildcards workflow-with-conditional-logic
 To see how the workflow looks with conditional logic, check out the corresponding tag.
 
 ```bash
-git checkout workflow-with-conditional-logic
+git checkout --force workflow-with-conditional-logic
 ```
 
 Confirm that the `filter` commands for the global build will be different than those of the other regional builds.
@@ -506,7 +506,7 @@ To see how the workflow looks with a profile, check out the corresponding tag.
 Note that this version of the repository defines a custom profile for my username in `profiles/huddlej/`.
 
 ```bash
-git checkout workflow-with-profile
+git checkout --force workflow-with-profile
 ```
 
 ## Conclusions
