@@ -92,6 +92,11 @@ bash builds.sh
 ```
 
 This script is all you need to create a single "global" Nextstrain build.
+When you're done exploring the output in the `results` and `auspice` directories, remove these directories.
+
+``` bash
+rm -rf results auspice
+```
 
 ### Use a Snakefile to implement the same commands with Snakemake
 
@@ -358,6 +363,12 @@ snakemake --lint
 
 Everything should look good!
 
+When you're done exploring the output in the `results` and `auspice` directories, remove these directories.
+
+``` bash
+rm -rf results auspice
+```
+
 ### Reuse rules with wildcards
 
 The current workflow creates a single "global" build for SARS-CoV-2 sequences, but ideally we'd like to also create multiple separate builds per major geographic region (e.g., Asia, Europe, etc.).
@@ -466,6 +477,12 @@ snakemake --cores 4 --use-conda --set-threads align=2 --printshellcmds
 
 We can now produce multiple regional builds with custom filter logic in parallel.
 This workflow has come a long way from the initial shell script!
+
+When you're done exploring the output in the `results` and `auspice` directories, remove these directories.
+
+``` bash
+rm -rf results auspice
+```
 
 ### Define your preferred Snakemake commands with a profile
 
