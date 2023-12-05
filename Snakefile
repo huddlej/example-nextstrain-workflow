@@ -10,7 +10,6 @@ rule all:
 include: "rules/common.smk"
 
 rule filter:
-    message: "Filter sequences and metadata to keep high quality sequences."
     input:
         sequences = "data/sequences.fasta",
         metadata = "data/metadata.tsv"
@@ -38,7 +37,6 @@ rule filter:
         """
 
 rule align:
-    message: "Align sequences."
     input:
         sequences = "results/{region}/filtered.fasta",
         reference = "config/reference.gb"
@@ -61,7 +59,6 @@ rule align:
         """
 
 rule tree:
-    message: "Infer a tree."
     input:
         alignment = "results/{region}/aligned.fasta"
     output:
@@ -80,7 +77,6 @@ rule tree:
         """
 
 rule refine:
-    message: "Build a time tree."
     input:
         alignment = "results/{region}/aligned.fasta",
         tree = "results/{region}/tree_raw.nwk",
@@ -104,7 +100,6 @@ rule refine:
         """
 
 rule export:
-    message: "Export tree to view with auspice."
     input:
         tree = "results/{region}/tree.nwk",
         metadata = "data/metadata.tsv",
